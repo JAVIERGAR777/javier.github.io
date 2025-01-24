@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participación Comunitaria</title>
+    <!-- Estilos de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+        #container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 60px);
+        }
+        #map {
+            height: 100%;
+            width: 70%;
+        }
+        #sidebar {
+            height: 100%;
+            width: 30%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #reason-container {
+            margin-top: 20px;
+            display: none;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .delete-button {
+            background-color: #DC3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+        #details-container {
+            margin-top: 20px;
+            display: none;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #sendButton {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+        }
+        #sendButton:hover {
+            background-color: #218838;
+        }
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+            }
+            #map, #sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Participación Comunitaria en Seguridad Ciudadana</h1>
+        <p>Haz clic en el mapa para marcar un lugar problemático y contribuir con tu comunidad.</p>
+    </header>
+
+    <div id="container">
+        <div id="map"></div>
+
+        <div id="sidebar">
+            <div class="button-container">
+                <button class="button" id="reportButton" disabled>Continuar con el reporte</button>
+            </div>
+            <div id="reason-container">
+                <label for="reason">Seleccione el motivo del reporte:</label>
+                <select id="reason">
+                    <option value="">Seleccione...</option>
+                    <option value="Basural">Basural</option>
+                    <option value="Auto quemado">Auto quemado</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div id="details-container">
+                <label for="details">Detalles adicionales:</label>
+                <textarea id="details" placeholder="Escribe más detalles aquí..."></textarea>
+            </div>
+            <div class="button-container">
+                <button class="button" id="sendButton">Enviar Reporte</button>
+            </div>
+            <div class="button-container" id="deleteContainer" style="display: none;">
+                <button class="delete-button" id="deleteButton">Modificar Ubicación</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([-34.6037, -58.3816], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        let marker = null;
+
+        map.on('click', (e) => {
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            marker = L.marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map);
+            document.getElementById('reportButton').disabled = false;
+            document.getElementById('deleteContainer').style.display = 'block';
+        });
+
+        document.getElementById('reportButton').addEventListener('click', () => {
+            if (marker) {
+                document.getElementById('reason-container').style.display = 'block';
+                document.getElementById('reportButton').disabled = true;
+            }
+        });
+
+        document.getElementById('reason').addEventListener('change', () => {
+            const reason = document.getElementById('reason').value;
+            if (reason) {
+                document.getElementById('details-container').style.display = 'block';
+            } else {
+                document.getElementById('details-container').style.display = 'none';
+            }
+            document.getElementById('sendButton').style.display = 'block';
+        });
+
+        document.getElementById('sendButton').addEventListener('click', () => {
+            const reason = document.getElementById('reason').value;
+            const details = document.getElementById('details').value;
+            if (reason) {
+                const lat = marker.getLatLng().lat;
+                const lng = marker.getLatLng().lng;
+
+                const token = 'patzC8KqaZk7XJuAA';
+                const baseId = 'apphUiw67G89xGMuN';
+                const tableId = 'tblJ9FFRNPDlvZdvM';
+
+                const url = `https://api.airtable.com/v0/${baseId}/${tableId}`;
+                const data = {
+                    records: [
+                        {
+                            fields: {
+                                Latitud: lat,
+                                Longitud: lng,
+                                'Motivo del Reporte': reason,
+                                'Detalles Adicionales': details
+                            }
+                        }
+                    ]
+                };
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Reporte enviado correctamente:', data);
+                    alert('Reporte enviado correctamente.');
+                })
+                .catch(error => {
+                    console.error('Error al enviar el reporte:', error);
+                    alert('Error al enviar el reporte.');
+                });
+
+                marker = null;
+                document.getElementById('reportButton').disabled = false;
+                document.getElementById('reason').value = '';
+                document.getElementById('reason-container').style.display = 'none';
+                document.getElementById('details-container').style.display = 'none';
+                document.getElementById('sendButton').style.display = 'none';
+                document.getElementById('deleteContainer').style.display = 'none';
+            }
+        });
+
+        document.getElementById('deleteButton').addEventListener('click', () => {
+            if (marker) {
+                map.removeLayer(marker);
+                marker = null;
+                document.getElementById('reportButton').disabled = true;
+                document.getElementById('reason-container').style.display = 'none';
+                document.getElementById('details-container').style.display = 'none';
+                document.getElementById('sendButton').style.display = 'none';
+                document.getElementById('deleteContainer').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
