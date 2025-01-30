@@ -15,25 +15,24 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
         }
 
         #map {
-            height: 100%;
-            width: 70%;
-            float: left;
+            height: 60%;
+            width: 100%;
         }
 
         #form-container {
-            width: 30%;
-            float: left;
+            width: 100%;
             padding: 20px;
-            margin-left: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #e8f7ff;
             overflow-y: auto;
+            margin-top: 20px;
         }
 
         #form-container h3 {
@@ -82,16 +81,12 @@
         /* Estilo para dispositivos móviles */
         @media (max-width: 768px) {
             #map {
-                width: 100%;
-                height: 60%; /* Mapa más alto en pantallas pequeñas */
-                float: none;
+                height: 50%;
             }
 
             #form-container {
-                width: 100%;
-                margin-left: 0;
                 margin-top: 20px;
-                border-radius: 10px;
+                padding: 15px;
             }
 
             #form-container h3 {
