@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa con Calles Seleccionables y Cuestionario</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
     <style>
         * {
             box-sizing: border-box;
@@ -23,6 +24,7 @@
         #map {
             height: 50%; /* Ajustado a 50% */
             width: 100%;
+            position: relative; /* Esto es clave para que el botón quede sobre el mapa */
         }
 
         #form-container {
@@ -193,11 +195,12 @@
                 <option value="nada transitable">Nada transitable</option>
             </select><br>
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Continuar</button>
         </form>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
     <script>
         var map = L.map('map').setView([-34.9461, -57.8846], 13); // Coordenadas de Buenos Aires
 
@@ -224,11 +227,25 @@
                 }).addTo(map);
             })
             .catch(error => console.error('Error cargando pj.geojson:', error));
-        
+
+        // Agregar control de ubicación
+        L.control.locate({
+            position: 'topright',  // Posición en la esquina superior derecha
+            strings: {
+                title: "Ver mi ubicación"
+            },
+            locateOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true, // Habilitar el seguimiento
+            keepCurrentZoomLevel: true, // Mantener el nivel de zoom actual
+            zoomToAccuracy: true, // Acercar cuando se localice
+        }).addTo(map);
+
         // Opcional: Lógica para enviar el formulario
         document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Formulario enviado. Gracias por tu respuesta!');
+            alert('Formulario enviado. Gracias por tu respuesta!'); // Se puede cambiar según la siguiente acción.
         });
     </script>
 </body>
