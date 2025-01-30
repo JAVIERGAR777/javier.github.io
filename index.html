@@ -6,40 +6,106 @@
     <title>Mapa con Calles Seleccionables y Cuestionario</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
         #map {
             height: 100vh;
-            width: 70%; /* Ajusta el tamaño del mapa */
+            width: 70%;
             float: left;
         }
+
         #form-container {
-            width: 30%; /* Ajusta el tamaño del formulario */
+            width: 30%;
             float: left;
             padding: 20px;
             margin-left: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #e8f7ff;
         }
+
+        #form-container h3 {
+            color: #007BFF;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
         label {
             font-weight: bold;
+            color: #007BFF;
         }
-        input[type="text"], textarea {
+
+        input[type="text"], input[type="number"], textarea, select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border-radius: 4px;
             border: 1px solid #ccc;
+            font-size: 1em;
         }
+
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
         button {
-            padding: 10px 15px;
-            background-color: #4CAF50;
+            padding: 12px 20px;
+            background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1.2em;
         }
+
         button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #003f7f;
+        }
+
+        /* Estilo para dispositivos móviles */
+        @media (max-width: 768px) {
+            #map {
+                width: 100%;
+                height: 70%;
+                float: none;
+            }
+
+            #form-container {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
+                border-radius: 10px;
+            }
+
+            #form-container h3 {
+                font-size: 1.3em;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            input[type="text"], input[type="number"], textarea, select {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            button {
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
@@ -48,16 +114,83 @@
     <div id="map"></div>
 
     <div id="form-container">
-        <h3>Cuestionario</h3>
+        <h3>1. Infraestructura Urbana</h3>
         <form id="questionnaire-form">
             <label for="line-id">ID de la línea:</label>
             <input type="text" id="line-id" readonly><br>
 
-            <label for="question">Pregunta 1:</label>
-            <textarea id="question" placeholder="Escribe tu respuesta..."></textarea><br>
+            <label for="refugios">1.1 Cantidad de refugios / paradas de colectivos:</label>
+            <input type="number" id="refugios" placeholder="Escribe un número..."><br>
 
-            <label for="question2">Pregunta 2:</label>
-            <textarea id="question2" placeholder="Escribe tu respuesta..."></textarea><br>
+            <label for="refugios-vandalizadas">1.2 Cantidad de refugios / paradas de colectivos vandalizadas:</label>
+            <input type="number" id="refugios-vandalizadas" placeholder="Escribe un número..."><br>
+
+            <label for="puentes">1.3 Cantidad de puentes:</label>
+            <input type="number" id="puentes" placeholder="Escribe un número..."><br>
+
+            <label for="puentes-peatonales">1.4 Cantidad de puentes peatonales:</label>
+            <input type="number" id="puentes-peatonales" placeholder="Escribe un número..."><br>
+
+            <label for="badenes">1.5 Cantidad de badenes / lomas de burro:</label>
+            <input type="number" id="badenes" placeholder="Escribe un número..."><br>
+
+            <label for="badenes-deteriorados">1.6 Cantidad de badenes / lomas de burro deteriorados:</label>
+            <input type="number" id="badenes-deteriorados" placeholder="Escribe un número..."><br>
+
+            <label for="luminarias-led">1.7 Cantidad de luminarias led:</label>
+            <input type="number" id="luminarias-led" placeholder="Escribe un número..."><br>
+
+            <label for="luminarias-led-no-funcionando">1.8 Cantidad de luminarias led sin funcionamiento:</label>
+            <input type="number" id="luminarias-led-no-funcionando" placeholder="Escribe un número..."><br>
+
+            <label for="luminarias-convencionales">1.9 Cantidad de luminarias convencionales:</label>
+            <input type="number" id="luminarias-convencionales" placeholder="Escribe un número..."><br>
+
+            <label for="luminarias-convencionales-no-funcionando">1.10 Cantidad de luminarias convencionales sin funcionamiento:</label>
+            <input type="number" id="luminarias-convencionales-no-funcionando" placeholder="Escribe un número..."><br>
+
+            <label for="cordon-asfalto">1.11 Calle con cordón y asfalto (Si / No):</label>
+            <select id="cordon-asfalto">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="solo-asfalto">1.12 Calle solo con asfalto (Si / No):</label>
+            <select id="solo-asfalto">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="mejorado">1.13 Calle con mejorado (Si / No):</label>
+            <select id="mejorado">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="zanja">1.14 Calle con zanja (Si / No):</label>
+            <select id="zanja">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="baches">1.15 Calle con baches o deterioradas (Si / No):</label>
+            <select id="baches">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="edificaciones">1.16 Calle con edificaciones ajustadas a la línea municipal (Si / No):</label>
+            <select id="edificaciones">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="estado-vereda">1.17 Estado de la vereda (transitable / poco transitable / nada transitable):</label>
+            <select id="estado-vereda">
+                <option value="transitable">Transitable</option>
+                <option value="poco transitable">Poco transitable</option>
+                <option value="nada transitable">Nada transitable</option>
+            </select><br>
 
             <button type="submit">Enviar</button>
         </form>
@@ -65,7 +198,7 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        var map = L.map('map').setView([-34.9367, -57.9071], 13); // Coordenadas de Buenos Aires
+        var map = L.map('map').setView([-34.6037, -58.3816], 13); // Coordenadas de Buenos Aires
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
@@ -81,19 +214,17 @@
                         weight: 4
                     },
                     onEachFeature: function (feature, layer) {
-                        // Usar el campo 'ID' que ya está en la propiedad 'properties'
                         var lineId = feature.properties.ID || 'Sin ID'; // Extrae el 'ID' de la propiedad 'properties'
 
                         layer.on('click', function () {
-                            // Mostrar el ID de la línea en el formulario
-                            document.getElementById('line-id').value = lineId;
+                            document.getElementById('line-id').value = lineId; // Mostrar ID de la línea en el formulario
                         });
                     }
                 }).addTo(map);
             })
             .catch(error => console.error('Error cargando pj.geojson:', error));
         
-        // Opcional: Puedes agregar más lógica aquí para manejar el formulario
+        // Opcional: Lógica para enviar el formulario
         document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Formulario enviado. Gracias por tu respuesta!');
