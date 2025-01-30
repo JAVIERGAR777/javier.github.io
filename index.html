@@ -21,7 +21,7 @@
         }
 
         #map {
-            height: 60%;
+            height: 80%; /* Ajuste mayor para el mapa */
             width: 100%;
         }
 
@@ -33,6 +33,8 @@
             background-color: #e8f7ff;
             overflow-y: auto;
             margin-top: 20px;
+            height: 20%; /* Menor altura para el formulario */
+            overflow-y: auto; /* Permite el desplazamiento si el formulario es largo */
         }
 
         #form-container h3 {
@@ -81,7 +83,7 @@
         /* Estilo para dispositivos móviles */
         @media (max-width: 768px) {
             #map {
-                height: 70%; /* Aumentar la altura del mapa en pantallas pequeñas */
+                height: 70%; /* Aumenta la altura del mapa en pantallas pequeñas */
             }
 
             #form-container {
