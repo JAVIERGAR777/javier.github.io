@@ -22,12 +22,12 @@
         }
 
         #map {
-            height: 50%; /* Ajustado a 50% */
+            height: 50%;
             width: 100%;
-            position: relative; /* Esto es clave para que el botón quede sobre el mapa */
+            position: relative;
         }
 
-        #form-container {
+        #form-container, #section2, #section3, #section4,  #section5, #section6, #section7, #section8, #section9, #section10 {
             width: 100%;
             padding: 20px;
             border: 1px solid #ddd;
@@ -35,27 +35,28 @@
             background-color: #e8f7ff;
             overflow-y: auto;
             margin-top: 20px;
-            height: 50%; /* Ajustado a 50% */
+            height: 50%;
         }
 
-        #form-container h3 {
+        #form-container h3, #section2 h3, #section3 h3, #section4 h3, #section5 h3, #section6 h3, #section7 h3, #section8 h3, #section9 h3, #section10 h3 {
             color: #007BFF;
-            font-size: 1.5em;
+            font-size: 1.2em;
             margin-bottom: 20px;
         }
 
         label {
             font-weight: bold;
             color: #007BFF;
+            font-size: 0.9em;
         }
 
         input[type="text"], input[type="number"], textarea, select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 10px 0;
             border-radius: 4px;
             border: 1px solid #ccc;
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
         input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
@@ -70,7 +71,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 1em;
         }
 
         button:hover {
@@ -81,20 +82,19 @@
             background-color: #003f7f;
         }
 
-        /* Estilo para dispositivos móviles */
         @media (max-width: 768px) {
             #map {
-                height: 40%; /* Mantener en 50% en pantallas pequeñas */
+                height: 40%;
             }
 
-            #form-container {
+            #form-container, #section2, #section3, #section4, #section5, #section6, #section7, #section8, #section9, #section10  {
                 margin-top: 20px;
                 padding: 15px;
-                height: 50%; /* Mantener el formulario en 50% */
+                height: 60%;
             }
 
-            #form-container h3 {
-                font-size: 1.3em;
+            #form-container h3, #section2 h3, #section3 h3, #section4 h3, #section5 h3, #section6 h3, #section7 h3, #section8 h3, #section9 h3, #section10 h3 {
+                font-size: 1.2em;
             }
 
             label {
@@ -199,54 +199,277 @@
         </form>
     </div>
 
+    <div id="section2" style="display:none;">
+        <h3>2. Uso y ocupación del espacio público y privado</h3>
+        <form id="questionnaire-form-2">
+            <label for="terrenos-sin-construcciones">2.1 Cantidad de terrenos sin construcciones o descampados:</label>
+            <input type="number" id="terrenos-sin-construcciones" placeholder="Escribe un número..."><br>
+
+            <label for="casas-abandonadas">2.2 Cantidad de casas / construcciones abandonadas:</label>
+            <input type="number" id="casas-abandonadas" placeholder="Escribe un número..."><br>
+
+            <label for="basurales">2.3 Cantidad de basurales:</label>
+            <input type="number" id="basurales" placeholder="Escribe un número..."><br>
+
+            <label for="vehiculos-abandono">2.4 Cantidad de vehículos en estado de abandono y/o quemados:</label>
+            <input type="number" id="vehiculos-abandono" placeholder="Escribe un número..."><br>
+
+            <label for="grafitis">2.5 Cantidad de frentes con grafitis o vandalizaciones:</label>
+            <input type="number" id="grafitis" placeholder="Escribe un número..."><br>
+
+            <label for="espacios-recreativos">2.6 Cantidad de plazas, parques y/o espacios destinados al uso recreativo:</label>
+            <input type="number" id="espacios-recreativos" placeholder="Escribe un número..."><br>
+
+            <label for="espacios-vandalizados">2.7 Cantidad de plazas, parques y/o espacios destinados al uso recreativo vandalizados:</label>
+            <input type="number" id="espacios-vandalizados" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-2">Continuar</button>
+        </form>
+    </div>
+    
+    <div id="section3" style="display:none">
+        <h3>3. Capilaridad Social </h3>
+        <form id="questionnaire-form-3">
+            <label for="sociedades-de-fomento">3.1 Club / Instituciones / Sociedades de Fomento (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Merenderos">3.2 Merenderos / Comedores (cantidad por calle)</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Iglesias">3.3 Iglesias - Parroquias (cantidad por calle):</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-3">Continuar</button>
+        </form>
+    </div>
+
+
+    <div id="section4" style="display:none">
+        <h3>4. Capilaridad Estatal </h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-4">Continuar</button>
+        </form>
+    </div>
+
+    <div id="section5" style="display:none">
+        <h3>5. Accesibilidad de transporte urbano y movilidad </h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-5">Continuar</button>
+        </form>
+    </div>
+
+
+    <div id="section6" style="display:none">
+        <h3>6.Arbolado y paisaje urbano </h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-6">Continuar</button>
+        </form>
+    </div>
+
+
+    <div id="section7" style="display:none">
+        <h3>7.Dispositivos de seguridad</h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-7">Continuar</button>
+        </form>
+    </div>
+
+
+    <div id="section8" style="display:none">
+        <h3>8.Actividad comercial,industrial y financiera </h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-8">Continuar</button>
+        </form>
+    </div>
+
+    <div id="section9" style="display:none">
+        <h3>9. Capilaridad Estatal </h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit" id="continue-btn-9">Continuar</button>
+        </form>
+    </div>
+
+    <div id="section10" style="display:none">
+        <h3>10. Ultimo Formulario </h3>
+        <form id="questionnaire-form-4">
+            <label for="sociedades-de-fomento">4.1 Agencias / organismos estatales (cantidad por calle):</label>
+            <input type="number" id="sociedades-de-fomento" placeholder="Escribe un número..."><br>
+
+            <label for="Comisarias-destacamentos">4.2 Cantidad de comisarías / Destacamentos / Puestos de policía por calle</label>
+            <input type="number" id="Merenderos" placeholder="Escribe un número..."><br>
+
+            <label for="Establecimientos educativos">4.3 Cantidad de establecimientos educativos estatales y privados por calle:</label>
+            <input type="number" id="Iglesias" placeholder="Escribe un número..."><br>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    
+    
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
     <script>
-        var map = L.map('map').setView([-34.9461, -57.8846], 13); // Coordenadas de Buenos Aires
+        var map = L.map('map').setView([-34.9461, -57.8846], 13);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Cargar la capa pj.geojson
-        fetch('./pj.geojson') // Asegúrate de que la ruta sea correcta
+        // Cargar capa GeoJSON
+        fetch('./pj.geojson')
             .then(response => response.json())
             .then(data => {
                 var pjLayer = L.geoJSON(data, {
                     style: {
-                        color: 'green',  // Estilo de las líneas de la capa pj
+                        color: 'green',
                         weight: 4
                     },
                     onEachFeature: function (feature, layer) {
-                        var lineId = feature.properties.ID || 'Sin ID'; // Extrae el 'ID' de la propiedad 'properties'
+                        var lineId = feature.properties.ID || 'Sin ID';
 
                         layer.on('click', function () {
-                            document.getElementById('line-id').value = lineId; // Mostrar ID de la línea en el formulario
+                            document.getElementById('line-id').value = lineId;
                         });
                     }
                 }).addTo(map);
             })
             .catch(error => console.error('Error cargando pj.geojson:', error));
 
-        // Agregar control de ubicación
         L.control.locate({
-            position: 'topright',  // Posición en la esquina superior derecha
-            strings: {
-                title: "Ver mi ubicación"
-            },
-            locateOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: true, // Habilitar el seguimiento
-            keepCurrentZoomLevel: true, // Mantener el nivel de zoom actual
-            zoomToAccuracy: true, // Acercar cuando se localice
+            position: 'topright',
+            strings: { title: "Ver mi ubicación" },
+            locateOptions: { enableHighAccuracy: true },
+            trackUserLocation: true,
+            keepCurrentZoomLevel: true,
+            zoomToAccuracy: true,
         }).addTo(map);
 
-        // Opcional: Lógica para enviar el formulario
+        // Lógica para manejar el botón "Continuar" en la primera sección
         document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Formulario enviado. Gracias por tu respuesta!'); // Se puede cambiar según la siguiente acción.
+            // Ocultar la primera sección y mostrar la segunda
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('section2').style.display = 'block';
         });
+
+        // Lógica para manejar el botón "Continuar" en la segunda sección
+        document.getElementById('continue-btn-2').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section2').style.display = 'none';
+            document.getElementById('section3').style.display = 'block';
+        });
+
+       // Lógica para manejar el botón "Continuar" en la tercera sección
+        document.getElementById('continue-btn-3').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section3').style.display = 'none';
+            document.getElementById('section4').style.display = 'block';   
+        });
+     
+           // Lógica para manejar el botón "Continuar" en la tercera sección
+           document.getElementById('continue-btn-4').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section4').style.display = 'none';
+            document.getElementById('section5').style.display = 'block';       
+        });
+
+            // Lógica para manejar el botón "Continuar" en la tercera sección
+            document.getElementById('continue-btn-5').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section5').style.display = 'none';
+            document.getElementById('section6').style.display = 'block';       
+
+        })
+            // Lógica para manejar el botón "Continuar" en la tercera sección
+           document.getElementById('continue-btn-6').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section6').style.display = 'none';
+            document.getElementById('section7').style.display = 'block';       
+        });
+
+           // Lógica para manejar el botón "Continuar" en la tercera sección
+           document.getElementById('continue-btn-7').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section7').style.display = 'none';
+            document.getElementById('section8').style.display = 'block';       
+
+        });
+
+            // Lógica para manejar el botón "Continuar" en la tercera sección
+           document.getElementById('continue-btn-8').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section8').style.display = 'none';
+            document.getElementById('section9').style.display = 'block';    
+        });       
+        
+            // Lógica para manejar el botón "Continuar" en la tercera sección
+            document.getElementById('continue-btn-9').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Ocultar la segunda sección y mostrar la tercera
+            document.getElementById('section9').style.display = 'none';
+            document.getElementById('section10').style.display = 'block';    
+        });        
     </script>
 </body>
 </html>
